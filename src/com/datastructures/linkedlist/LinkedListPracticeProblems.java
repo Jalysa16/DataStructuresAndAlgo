@@ -91,6 +91,84 @@ public class LinkedListPracticeProblems {
 		return head;
 	}
 	
+	
+	public Node reverseTheList(Node head) {
+		Node prev = null;
+		Node current = head;
+		Node next = null;
+		
+		while(current != null) {
+			next = current.next;
+			current.next = prev;
+			prev = current;
+			current = next;
+		}
+		
+		
+		return prev;
+	}
+	
+	public Node reverseByDigit(Node head,int digit) {
+		 //step 1) i need to find all the nodes i need to reverse 
+		 
+		 Node nodesToBeRev = head;
+		 Node nodesReversed = null, finalNodeList = null, tail = null;
+		 
+		 while(nodesToBeRev != null) {
+		 
+		int cnt = 0;
+		 nodesToBeRev = head;
+		 
+		 while(nodesToBeRev != null && cnt < digit) {
+			 cnt++;
+			 nodesToBeRev = nodesToBeRev.next;
+		 }
+		 
+		//yes there are enough nodes to be reversed
+		 if(cnt == digit) {
+			 nodesReversed = reverseNodes(head,digit);
+		 
+		 
+		 if(finalNodeList == null) {
+			 finalNodeList = nodesReversed;
+		 }
+		 
+		 if(tail != null) {
+			 tail.next = nodesReversed;
+		 }
+		 
+		 tail = head;
+		 head = nodesToBeRev;
+		 }
+		 
+		 }
+		 
+		 if(tail != null) {
+			 tail.next = head;
+		 }
+		 
+		 if(finalNodeList == null) {
+			 return head;
+		 }else {
+			 return finalNodeList;
+		 }
+		 
+	 }
+	 
+	 public Node reverseNodes(Node head,int digit) {
+		 Node current = head;
+		 Node next = null, previous = null;
+		 while(digit > 0) {
+			 next = current.next;
+			 current.next = previous;
+			 previous = current;
+			 current = next;
+			 digit --;
+		 }
+		 return previous;
+	 }
+	            
+	
 	public void printlnList(Node head) {
 		Node current = head;
 		
@@ -107,18 +185,28 @@ public class LinkedListPracticeProblems {
 	}
 
 	public static void main(String[] args) {
-		Node h = null;
+		Node h = null, k = null;
 		LinkedListPracticeProblems obj = new LinkedListPracticeProblems();
-		h  = obj.insert(h,12);
-		h = obj.insert(h,14);
-		h = obj.insert(h, 20);
-		h = obj.insert(h, 34);
-		h = obj.insert(h, 26);
-		obj.printlnList(h);
+		h  = obj.insert(h,1);
+		h = obj.insert(h,2);
+		h = obj.insert(h,3);
+		h = obj.insert(h,4);
+		h = obj.insert(h,5);
+		k = h ;
 		
-		System.out.println(obj.returnNthPositionFromRightPt2(h, 5));
 		obj.printlnList(h);
-
+		System.out.println("--------------------------------");
+		h = obj.reverseByDigit(h,2);
+		obj.printlnList(h);
+		int x = -129;
+		int y = -129;
+		
+		List<Integer> list = new ArrayList<Integer>();
+		list.add(x);
+		list.add(y);
+		
+		System.out.println(list.get(0).equals(list.get(1)));
+		
 	}
 
 }
