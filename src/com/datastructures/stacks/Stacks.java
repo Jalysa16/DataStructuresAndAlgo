@@ -1,5 +1,8 @@
 package com.datastructures.stacks;
 
+/*
+ * This is stacks implemented by array, with a fixed size
+ */
 public class Stacks {
 	final int maxSize = 10;
 	int top;
